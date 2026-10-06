@@ -85,10 +85,10 @@
       <div id="vis-bar" class="chart-box"></div>
     </div>
 
-    <!-- Exercício 2: Dois Scatterplots Lado a Lado -->
+    <!-- Exercício 2: Dois Scatterplots Lado a Lado por Gênero -->
     <div class="card">
-      <h2>2. Dois Scatterplots Lado a Lado</h2>
-      <p>Dispersão entre variáveis quantitativas agrupadas por tipo de exercício.</p>
+      <h2>2. Dois Scatterplots Lado a Lado (Homens e Mulheres)</h2>
+      <p>Relação entre Idade e Calorias Queimadas separada por gênero.</p>
       <div id="vis-scatter" class="chart-box"></div>
     </div>
 
@@ -98,13 +98,10 @@
   </div>
 
   <script>
-    /*
-      ATENÇÃO: Substitua 'life_style_data.csv' pelo caminho do seu CSV no repositório
-      ou pela URL direta do dataset que está no Observable.
-    */
-    const DATA_URL = "https://old.observablehq.com/d/7fe878d4bc966eba#life_style_data";
+    // URL direta do arquivo CSV (com CORS liberado pelo servidor de arquivos do Observable)
+    const DATA_URL = "https://static.observableusercontent.com/files/f6f1ea966e2db89267aea24d18b9b77109efe0dd1e07f54ca1c8ad83a9659838ea845596b0dba4e7388441c1a8f21213f12a3eef8adba45ce43f2bd99d8330e6";";
 
-    // 1. Especificação do Gráfico de Barras Agregadas Ordenado
+    // 1. Gráfico de Barras Agregadas Ordenado (Exercício 1)
     const specBar = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
       "description": "Média de Calorias Queimadas por Workout_Type em ordem crescente.",
@@ -133,7 +130,7 @@
       }
     };
 
-    // 2. Especificação dos Dois Scatterplots Lado a Lado por Gênero (Homens vs Mulheres)
+    // 2. Dois Scatterplots Lado a Lado por Gênero (Exercício 2)
     const specScatter = {
       "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
       "data": { "url": DATA_URL },
