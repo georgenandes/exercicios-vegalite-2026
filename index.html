@@ -168,19 +168,6 @@
     // Renderização dos gráficos
     vegaEmbed("#vis-bar", specBar).catch(console.error);
     vegaEmbed("#vis-scatter", specScatter).catch(console.error);
-    // adicionando o trecho gerado apos o embeded
-    <div id="observablehq-grafico_barras-05a2142c"></div>
-    <div id="observablehq-grafico_scaterplot-05a2142c"></div>
-      <p>Credit: <a href="https://observablehq.com/d/aa4fd784ae60d02d">Vega-Lite Api - Exercícios - 2026.2 by georgenandes</a></p>
-
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
-    <script type="module">
-      import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-      import define from "https://api.observablehq.com/d/aa4fd784ae60d02d.js?v=4";
-      new Runtime().module(define, name => {
-      if (name === "grafico_barras") return new Inspector(document.querySelector("#observablehq-grafico_barras-05a2142c"));
-      if (name === "grafico_scaterplot") return new Inspector(document.querySelector("#observablehq-grafico_scaterplot-05a2142c"));
-    });
-  </script>
+    </script>
 </body>
 </html>
