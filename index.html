@@ -4,173 +4,58 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exercícios Vega-Lite - Visualização de Dados</title>
-
-  <!-- Importação das bibliotecas Vega, Vega-Lite e Vega-Embed via CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
   <style>
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #f4f6f8;
-      color: #333;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #f8f9fa;
       margin: 0;
-      padding: 30px;
+      padding: 40px 20px;
+      color: #333;
     }
-
     .container {
-      max-width: 1000px;
+      max-width: 960px;
       margin: 0 auto;
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    h1 {
-      color: #2c3e50;
-      margin-bottom: 8px;
-    }
-
-    p.subtitle {
-      color: #7f8c8d;
-      font-size: 1.1em;
-    }
-
     .card {
-      background: #ffffff;
-      border-radius: 10px;
+      background: #fff;
+      border-radius: 8px;
       padding: 24px;
-      margin-bottom: 35px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
-
-    .card h2 {
-      margin-top: 0;
-      color: #34495e;
-      border-bottom: 2px solid #ecf0f1;
-      padding-bottom: 10px;
-    }
-
-    .chart-box {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 15px 0;
-      overflow-x: auto;
-    }
-
-    footer {
-      text-align: center;
-      color: #95a5a6;
-      font-size: 0.9em;
-      margin-top: 50px;
-    }
+    h1 { color: #2c3e50; text-align: center; }
+    h2 { color: #34495e; border-bottom: 2px solid #eee; padding-bottom: 10px; }
   </style>
 </head>
 <body>
-
   <div class="container">
-    <header>
-      <h1>Visualizações com Vega-Lite</h1>
-      <p class="subtitle">Exercícios - Estilo de Vida e Saúde (life_style_data)</p>
-    </header>
+    <h1>Exercícios Vega-Lite - 2026.2</h1>
 
-    <!-- Exercício 1: Gráfico de Barras Agregadas -->
     <div class="card">
-      <h2>1. Gráfico de Barras Agregadas</h2>
-      <p>Média da variável quantitativa por <code>Workout_Type</code> em ordem crescente.</p>
-      <div id="vis-bar" class="chart-box"></div>
+      <h2>Exercício 1: Gráfico de Barras Agregadas</h2>
+      <div id="observablehq-grafico_barras"></div>
     </div>
 
-    <!-- Exercício 2: Dois Scatterplots Lado a Lado -->
     <div class="card">
-      <h2>2. Dois Scatterplots Lado a Lado</h2>
-      <p>Dispersão entre variáveis quantitativas agrupadas por tipo de exercício.</p>
-      <div id="vis-scatter" class="chart-box"></div>
+      <h2>Exercício 2: Scatterplots por Gênero</h2>
+      <div id="observablehq-grafico_scatters"></div>
     </div>
-
-    <footer>
-      <p>Desenvolvido para a atividade de Visualização de Dados (2026.2).</p>
-    </footer>
   </div>
 
-  <script>
-    /*
-      ATENÇÃO: Substitua 'life_style_data.csv' pelo caminho do seu CSV no repositório
-      ou pela URL direta do dataset que está no Observable.
-    */
-    const DATA_URL = "https://old.observablehq.com/d/7fe878d4bc966eba#life_style_data";
-
-    // 1. Especificação do Gráfico de Barras Agregadas Ordenado
-    const specBar = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "description": "Média de Calorias Queimadas por Workout_Type em ordem crescente.",
-      "data": { "url": DATA_URL },
-      "width": 550,
-      "height": 320,
-      "mark": { "type": "bar", "cornerRadiusEnd": 4, "tooltip": true },
-      "encoding": {
-        "x": {
-          "field": "Workout_Type",
-          "type": "nominal",
-          "title": "Tipo de Exercício (Workout_Type)",
-          "sort": { "field": "Calories_Burned", "op": "mean", "order": "ascending" }
-        },
-        "y": {
-          "field": "Calories_Burned",
-          "aggregate": "mean",
-          "type": "quantitative",
-          "title": "Média de Calorias Queimadas"
-        },
-        "color": {
-          "field": "Workout_Type",
-          "type": "nominal",
-          "legend": null
-        }
-      }
-    };
-
-    // 2. Especificação dos Dois Scatterplots Lado a Lado por Gênero (Homens vs Mulheres)
-    const specScatter = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-      "data": { "url": DATA_URL },
-      "facet": {
-        "column": {
-          "field": "Gender",
-          "type": "nominal",
-          "title": "Gênero"
-        }
-      },
-      "spec": {
-        "width": 320,
-        "height": 300,
-        "mark": { "type": "circle", "size": 40, "opacity": 0.6, "tooltip": true },
-        "encoding": {
-          "x": {
-            "field": "Age",
-            "type": "quantitative",
-            "title": "Idade"
-          },
-          "y": {
-            "field": "Calories_Burned",
-            "type": "quantitative",
-            "title": "Calorias Queimadas"
-          },
-          "color": {
-            "field": "Gender",
-            "type": "nominal",
-            "legend": null
-          }
-        }
-      }
-    };
-
-    // Renderização dos gráficos
-    vegaEmbed("#vis-bar", specBar).catch(console.error);
-    vegaEmbed("#vis-scatter", specScatter).catch(console.error);
+  <!-- Substitua o trecho abaixo pelo script gerado pelo Embed do Observable -->
+  <script type="module">
+    <div id="observablehq-grafico_barras-05a2142c"></div>
+	<div id="observablehq-grafico_scaterplot-05a2142c"></div>
+	<p>Credit: <a href="https://observablehq.com/d/aa4fd784ae60d02d">Vega-Lite Api - Exercícios - 2026.2 by georgenandes</a></p>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
+	<script type="module">
+	import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
+	import define from "https://api.observablehq.com/d/aa4fd784ae60d02d.js?v=4";
+	new Runtime().module(define, name => {
+  	if (name === "grafico_barras") return new Inspector(document.querySelector("#observablehq-grafico_barras-05a2142c"));
+  	if (name === "grafico_scaterplot") return new Inspector(document.querySelector("#observablehq-grafico_scaterplot-05a2142c"));
+	});
   </script>
 </body>
 </html>
